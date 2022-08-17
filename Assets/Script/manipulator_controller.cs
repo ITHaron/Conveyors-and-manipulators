@@ -38,13 +38,6 @@ public class manipulator_controller : MonoBehaviour
         if (collider.gameObject.tag == "box")
         {
             available_item = null;
-            // if (base_manipulator.localEulerAngles.y == angle_inp)
-            // {
-            //     // StartCoroutine(item_grabing());
-            //     rotating_angle = angle_out;
-            //     StartCoroutine(rotate_manipulator());
-            //     print(collider.gameObject.name);
-            // }
         }
     }
 
