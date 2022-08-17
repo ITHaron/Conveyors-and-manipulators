@@ -5,7 +5,9 @@ using UnityEngine;
 public class conveyor_move : MonoBehaviour
 {
     [SerializeField] private int speed = 1;
+    [SerializeField] private bool upend = false;
     private Rigidbody rBody;
+    
     
     void Start()
     {
@@ -15,7 +17,11 @@ public class conveyor_move : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 pos = rBody.position;
-        var distance = Vector3.back * speed * Time.fixedDeltaTime;
+        Vector3 distance;
+        if(upend)
+            distance = Vector3.right * speed * Time.fixedDeltaTime;
+        else
+            distance = Vector3.back * speed * Time.fixedDeltaTime;
 
         rBody.position += distance;
         rBody.MovePosition(pos);

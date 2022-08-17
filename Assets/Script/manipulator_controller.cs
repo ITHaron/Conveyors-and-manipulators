@@ -12,16 +12,16 @@ public class manipulator_controller : MonoBehaviour
     [SerializeField] private float rotating_angle;
     [SerializeField] private bool rotating = false;
     
-    [SerializeField] private bool item_grab = false;
-    [SerializeField] private GameObject available_item;
+    [SerializeField] private bool is_grab = false;
+    [SerializeField] private GameObject item_grab = null;
+    [SerializeField] private GameObject available_item = null;
     [SerializeField] private Transform base_manipulator;
-    [SerializeField] private Transform bone_hand_bottom;
-    [SerializeField] private Transform bone_hand_top;
+    // [SerializeField] private Transform bone_hand_bottom;
+    // [SerializeField] private Transform bone_hand_top;
 
     void Start() {
         base_manipulator = transform.Find("bone_base");
-        bone_hand_bottom = base_manipulator.Find("bone_hand_bottom");
-        bone_hand_top = bone_hand_bottom.Find("bone_hand_top");
+        //bone_hand_top.rotation = Quaternion.Euler(-70, 0, 0);
         rotating_angle = angle_inp;
     }
 
@@ -52,29 +52,35 @@ public class manipulator_controller : MonoBehaviour
     {
         if(rotating == false)
         {
-            if (item_grab == false)
+            if (is_grab == false)
             {
                 if (base_manipulator.localEulerAngles.y == angle_inp)
                 {
                     if (available_item != null)
                     {
                         rotating_angle = Abs(angle_inp - angle_out);
-                        StartCoroutine(grab_manipulator());
+                        StartCoroutine(down_manipulator());
                     }
                 }
-                else
+                else if (base_manipulator.localEulerAngles.y == angle_out)
                 {
                     rotating_angle = angle_inp - angle_out;
+                    StartCoroutine(down_manipulator());
                     //StartCoroutine(rotate_manipulator());
                 }  
             }
-            else
+            else if (base_manipulator.localEulerAngles.y == angle_out)
             {
-                //item_grab = false;
-                // StartCoroutine(item_ungrabing());
+                
             }
         }
     }
+
+    private Transform get_claw()
+    {
+        return base_manipulator.Find("bone_hand_bottom/bone_hand_top/claw");
+    }
+
 
     IEnumerator rotate_manipulator()
     {
@@ -94,25 +100,73 @@ public class manipulator_controller : MonoBehaviour
 
     IEnumerator grab_manipulator()
     {
-        item_grab = true;
-        float _speed = speed*2;
+        if (available_item != null)
+            item_grab = available_item.gameObject;
+    
+        item_grab.GetComponent<Rigidbody>().isKinematic = true;
+        item_grab.transform.SetParent(get_claw());
+        yield return null;
+        StartCoroutine(up_manipulator());
+    }
+
+    IEnumerator ungrab_manipulator()
+    {
+        item_grab.GetComponent<Rigidbody>().isKinematic = false;
+        item_grab.transform.SetParent(GameObject.Find("conveyor").transform);
+        item_grab = null;
+        yield return null;
+        StartCoroutine(up_manipulator());
+    }
+
+    IEnumerator down_manipulator()
+    {
+        Transform bone_hand_bottom = base_manipulator.Find("bone_hand_bottom");
+        Transform bone_hand_top = bone_hand_bottom.Find("bone_hand_top");
+
+        Quaternion startRotation_bottom = bone_hand_bottom.rotation;
+        Quaternion targetRotation_bottom = bone_hand_bottom.rotation * Quaternion.Euler(-50, 0, 0);
+        Quaternion startRotation_top = bone_hand_top.rotation;
+        Quaternion targetRotation_top = bone_hand_top.rotation * Quaternion.Euler(0, 0, 0);
+
         float timeElapsed = 0;
-        //Quaternion startRotation_bottom = bone_hand_bottom.rotation;
-        //Quaternion targetRotation_bottom = Quaternion.Euler(-70, -90, 0);
-
-        Quaternion startRotation_top = Quaternion.Euler(-70, 0, 0);
-        Quaternion targetRotation_top = Quaternion.Euler(-20, 0, 0);
-
+        is_grab = true;
         while (timeElapsed < speed)
         {
-            //bone_hand_bottom.rotation = Quaternion.Slerp(startRotation_bottom, targetRotation_bottom, timeElapsed / _speed);
-            bone_hand_top.rotation = Quaternion.Slerp(Quaternion.Euler(-70, 0, 0), Quaternion.Euler(-20, 0, 0), timeElapsed / speed);
+            bone_hand_bottom.rotation = Quaternion.Slerp(startRotation_bottom, targetRotation_bottom, timeElapsed / speed);
+            bone_hand_top.rotation = Quaternion.Slerp(startRotation_top, targetRotation_top, timeElapsed / speed);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-        //bone_hand_bottom.rotation = targetRotation_bottom;
-        //bone_hand_top.rotation = targetRotation_top;
-        item_grab = false;
-        //StartCoroutine(rotate_manipulator());
+        bone_hand_bottom.rotation = targetRotation_bottom;
+        bone_hand_top.rotation = targetRotation_top;
+
+        if (item_grab == null)
+            StartCoroutine(grab_manipulator());
+        else
+            StartCoroutine(ungrab_manipulator());
+    }
+
+    IEnumerator up_manipulator()
+    {
+        Transform bone_hand_bottom = base_manipulator.Find("bone_hand_bottom");
+        Transform bone_hand_top = bone_hand_bottom.Find("bone_hand_top");
+
+        Quaternion startRotation_bottom = bone_hand_bottom.rotation;
+        Quaternion targetRotation_bottom = bone_hand_bottom.rotation * Quaternion.Euler(50, 0, 0);
+        Quaternion startRotation_top = bone_hand_top.rotation;
+        Quaternion targetRotation_top = bone_hand_top.rotation * Quaternion.Euler(0, 0, 0);
+
+        float timeElapsed = 0;
+        while (timeElapsed < speed)
+        {
+            bone_hand_bottom.rotation = Quaternion.Slerp(startRotation_bottom, targetRotation_bottom, timeElapsed / speed);
+            bone_hand_top.rotation = Quaternion.Slerp(startRotation_top, targetRotation_top, timeElapsed / speed);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        bone_hand_bottom.rotation = targetRotation_bottom;
+        bone_hand_top.rotation = targetRotation_top;
+        is_grab = false;
+        StartCoroutine(rotate_manipulator());
     }
 }
