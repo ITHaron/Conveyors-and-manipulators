@@ -94,12 +94,18 @@ public class manipulator_controller : MonoBehaviour
     IEnumerator grab_manipulator()
     {
         if (available_item != null)
+        {
             item_grab = available_item.gameObject;
-    
-        item_grab.GetComponent<Rigidbody>().isKinematic = true;
-        item_grab.transform.SetParent(get_claw());
+            item_grab.GetComponent<Rigidbody>().isKinematic = true;
+            item_grab.transform.SetParent(get_claw());
+            yield return null;
+            StartCoroutine(up_manipulator());
+        }
+        else
+        {
+            StartCoroutine(up_manipulator());
+        }
         yield return null;
-        StartCoroutine(up_manipulator());
     }
 
     IEnumerator ungrab_manipulator()

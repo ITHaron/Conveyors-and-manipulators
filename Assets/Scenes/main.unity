@@ -271,8 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 7612212822665070592, guid: 664e838b3d93871468dc8ed75e71b9bb, type: 3}
-  box_count: 10
-  time: 5
+  time: 2
 --- !u!114 &260978579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed0d96054da4a54c80e0b98bcf7755b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.82
+  speed: 0.3
   angle_inp: 0
   angle_out: 90
   rotating_angle: 0
@@ -305,8 +304,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.7}
-  m_Center: {x: 2.25, y: 1, z: 0.25}
+  m_Size: {x: 1, y: 1, z: 0.46}
+  m_Center: {x: 2.25, y: 1, z: -0.02}
 --- !u!1 &316464570
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed0d96054da4a54c80e0b98bcf7755b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.82
+  speed: 0.5
   angle_inp: 90
   angle_out: 180
   rotating_angle: 0
@@ -825,8 +824,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 1, z: 1}
-  m_Center: {x: 0.25, y: 1, z: -2.25}
+  m_Size: {x: 0.38, y: 1, z: 1}
+  m_Center: {x: -0.05, y: 1, z: -2.25}
 --- !u!1 &1108210677
 GameObject:
   m_ObjectHideFlags: 0
@@ -2539,6 +2538,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7867211678455717434}
   - component: {fileID: 3197299983599620035}
+  - component: {fileID: 7867211678455717435}
   m_Layer: 0
   m_Name: hand_2
   m_TagString: Untagged
@@ -2750,6 +2750,19 @@ Transform:
   m_Father: {fileID: 715083056}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7867211678455717435
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5723272846105234460}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.34, y: 0.22, z: 0.41534907}
+  m_Center: {x: 1.35, y: -0.45, z: 0.31088817}
 --- !u!33 &7871046676659459251
 MeshFilter:
   m_ObjectHideFlags: 0
