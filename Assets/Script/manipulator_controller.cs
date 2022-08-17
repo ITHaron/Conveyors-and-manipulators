@@ -1,27 +1,28 @@
+using static System.Math;
 using System.Collections;
 using System.Collections.Generic;
-using static System.Math;
 using UnityEngine;
 
 public class manipulator_controller : MonoBehaviour
 {
     [SerializeField] private float speed = 1;
     [SerializeField] private float angle_inp = 90f;
-    [SerializeField] private float angle_out = 180f;
+    [SerializeField] private float angle_out = 90f;
 
     [SerializeField] private float rotating_angle;
     [SerializeField] private bool rotating = false;
     
-    [SerializeField] private bool item_grab;
-
+    [SerializeField] private bool item_grab = false;
     [SerializeField] private GameObject available_item;
     [SerializeField] private Transform base_manipulator;
+    [SerializeField] private Transform bone_hand_bottom;
+    [SerializeField] private Transform bone_hand_top;
 
     void Start() {
         base_manipulator = transform.Find("bone_base");
+        bone_hand_bottom = base_manipulator.Find("bone_hand_bottom");
+        bone_hand_top = bone_hand_bottom.Find("bone_hand_top");
         rotating_angle = angle_inp;
-        base_manipulator.rotation = Quaternion.Euler(new Vector3(0, angle_inp, 0));
-        print(base_manipulator.localEulerAngles.y);
     }
 
     void OnTriggerEnter(Collider collider)
@@ -51,30 +52,25 @@ public class manipulator_controller : MonoBehaviour
     {
         if(rotating == false)
         {
-            print(base_manipulator.localEulerAngles.y);
             if (item_grab == false)
             {
                 if (base_manipulator.localEulerAngles.y == angle_inp)
                 {
                     if (available_item != null)
                     {
-                        // StartCoroutine(item_grabing());
-                        item_grab = true;
                         rotating_angle = Abs(angle_inp - angle_out);
-                        print("inp");
-                        StartCoroutine(rotate_manipulator());
+                        StartCoroutine(grab_manipulator());
                     }
                 }
                 else
                 {
-                    print("out");
                     rotating_angle = angle_inp - angle_out;
-                    StartCoroutine(rotate_manipulator());
+                    //StartCoroutine(rotate_manipulator());
                 }  
             }
             else
             {
-                item_grab = false;
+                //item_grab = false;
                 // StartCoroutine(item_ungrabing());
             }
         }
@@ -94,5 +90,29 @@ public class manipulator_controller : MonoBehaviour
         }
         base_manipulator.rotation = targetRotation;
         rotating = false;
+    }
+
+    IEnumerator grab_manipulator()
+    {
+        item_grab = true;
+        float _speed = speed*2;
+        float timeElapsed = 0;
+        //Quaternion startRotation_bottom = bone_hand_bottom.rotation;
+        //Quaternion targetRotation_bottom = Quaternion.Euler(-70, -90, 0);
+
+        Quaternion startRotation_top = Quaternion.Euler(-70, 0, 0);
+        Quaternion targetRotation_top = Quaternion.Euler(-20, 0, 0);
+
+        while (timeElapsed < speed)
+        {
+            //bone_hand_bottom.rotation = Quaternion.Slerp(startRotation_bottom, targetRotation_bottom, timeElapsed / _speed);
+            bone_hand_top.rotation = Quaternion.Slerp(Quaternion.Euler(-70, 0, 0), Quaternion.Euler(-20, 0, 0), timeElapsed / speed);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        //bone_hand_bottom.rotation = targetRotation_bottom;
+        //bone_hand_top.rotation = targetRotation_top;
+        item_grab = false;
+        //StartCoroutine(rotate_manipulator());
     }
 }
