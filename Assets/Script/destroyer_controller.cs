@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class destroyer_controller : MonoBehaviour
 {
+    public UnityEvent<string> destroyItem;
 
-    void OnTriggerEnter(Collider collider)
+    void OnTriggerEnter(Collider other)
     {
-        if (collider.gameObject.tag == "box")
+        if (other.gameObject.tag == "box")
         {
-            print(collider.gameObject);
-            Destroy(collider.gameObject);
+            destroyItem.Invoke(other.gameObject.GetComponent<item>().get_tag());
+            Destroy(other.gameObject);
         }
     }
 }

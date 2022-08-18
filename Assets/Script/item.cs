@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class item : MonoBehaviour
 {
-    private string tag;
-    void Start()
+    [SerializeField] private string tag;
+    
+    public void set_tag(string tag)
     {
-        
+        this.tag = tag;
     }
 
-    void Update()
+    public string get_tag()
     {
-        
+        return this.tag;
     }
 }

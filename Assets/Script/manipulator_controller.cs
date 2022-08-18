@@ -58,13 +58,11 @@ public class manipulator_controller : MonoBehaviour
                 else if (base_manipulator.localEulerAngles.y == angle_out)
                 {
                     rotating_angle = angle_inp - angle_out;
-                    StartCoroutine(down_manipulator());
-                    //StartCoroutine(rotate_manipulator());
+                    if(item_grab != null)
+                        StartCoroutine(down_manipulator());
+                    else
+                        StartCoroutine(rotate_manipulator());
                 }  
-            }
-            else if (base_manipulator.localEulerAngles.y == angle_out)
-            {
-                
             }
         }
     }
@@ -166,6 +164,8 @@ public class manipulator_controller : MonoBehaviour
         bone_hand_bottom.rotation = targetRotation_bottom;
         bone_hand_top.rotation = targetRotation_top;
         is_grab = false;
-        StartCoroutine(rotate_manipulator());
+
+        if (item_grab != null && base_manipulator.localEulerAngles.y == angle_inp)
+            StartCoroutine(rotate_manipulator());
     }
 }
