@@ -18,6 +18,8 @@ public class press_controller : MonoBehaviour
         Rigidbody press = transform.Find("press").GetComponent<Rigidbody>();
         startPos = press.position;
         endPos = startPos - new Vector3(0, 0.28f, 0);
+
+        print(Application.version);
     }
 
     void OnMouseDown()

@@ -86,29 +86,22 @@ public class manipulator_controller : MonoBehaviour
         rotating = false;
     }
 
-    IEnumerator grab_manipulator()
+    void grab_manipulator()
     {
         if (available_item != null)
         {
             item_grab = available_item.gameObject;
             item_grab.GetComponent<Rigidbody>().isKinematic = true;
             item_grab.transform.SetParent(get_claw());
-            yield return null;
-            StartCoroutine(up_manipulator());
         }
-        else
-        {
-            StartCoroutine(up_manipulator());
-        }
-        yield return null;
+        StartCoroutine(up_manipulator());
     }
 
-    IEnumerator ungrab_manipulator()
+    void ungrab_manipulator()
     {
         item_grab.GetComponent<Rigidbody>().isKinematic = false;
         item_grab.transform.SetParent(GameObject.Find("conveyor").transform);
         item_grab = null;
-        yield return null;
         StartCoroutine(up_manipulator());
     }
 
@@ -135,9 +128,9 @@ public class manipulator_controller : MonoBehaviour
         bone_hand_top.rotation = targetRotation_top;
 
         if (item_grab == null)
-            StartCoroutine(grab_manipulator());
+            grab_manipulator();
         else
-            StartCoroutine(ungrab_manipulator());
+            ungrab_manipulator();
     }
 
     IEnumerator up_manipulator()
