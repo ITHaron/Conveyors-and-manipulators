@@ -16,12 +16,9 @@ public class manipulator_controller : MonoBehaviour
     [SerializeField] private GameObject item_grab = null;
     [SerializeField] private GameObject available_item = null;
     [SerializeField] private Transform base_manipulator;
-    // [SerializeField] private Transform bone_hand_bottom;
-    // [SerializeField] private Transform bone_hand_top;
 
     void Start() {
         base_manipulator = transform.Find("bone_base");
-        //bone_hand_top.rotation = Quaternion.Euler(-70, 0, 0);
         rotating_angle = angle_inp;
     }
 

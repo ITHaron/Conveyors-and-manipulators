@@ -1486,14 +1486,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905585603}
-  m_LocalRotation: {x: 0.16435903, y: 0, z: 0, w: 0.9864006}
-  m_LocalPosition: {x: -2.16, y: 3.15, z: -4.98}
+  m_LocalRotation: {x: 0.11745074, y: 0, z: 0, w: 0.9930787}
+  m_LocalPosition: {x: -0.36, y: 2.3, z: -4.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 18.92, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 13.49, y: 0, z: 0}
 --- !u!1 &912857387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1597,7 +1597,7 @@ GameObject:
   - component: {fileID: 1055791964}
   - component: {fileID: 1055791963}
   m_Layer: 0
-  m_Name: Armature_1
+  m_Name: Armature_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2395,8 +2395,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1696681170}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.073388, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.052, y: 1.139, z: -0.447}
+  m_LocalScale: {x: 0.25290465, y: 0.1487358, z: 0.19238}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2057005443}
@@ -2426,7 +2426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939306212}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.8, y: -6.9327226, z: 9.129723}
+  m_LocalPosition: {x: -1.8, y: -6.9327226, z: 9.179}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2765,8 +2765,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7623258495566044063}
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.615689, y: 0, z: -3.0518098}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.68, y: 0, z: -3.0518098}
+  m_LocalScale: {x: 1.0089384, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450653655400260}
@@ -2859,14 +2859,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4654503703355386264}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.073388, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.17923145, y: 0, z: 0, w: 0.983807}
+  m_LocalPosition: {x: -0.058, y: 1.137, z: -0.451}
+  m_LocalScale: {x: 0.35, y: 0.24, z: 0.17573296}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3603400420446484537}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 20.65, y: 0, z: 0}
 --- !u!33 &2079272709509563793
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3465,7 +3465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tag: circle
   material: {fileID: 2100000, guid: 8223ec6bb216483478e548c2984b39ea, type: 2}
-  speed: 5
+  speed: 10
 --- !u!54 &5693930066476411228
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3527,7 +3527,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7867211678455717434}
   - component: {fileID: 3197299983599620035}
-  - component: {fileID: 7867211678455717435}
   m_Layer: 0
   m_Name: hand_2
   m_TagString: Untagged
@@ -3739,19 +3738,6 @@ Transform:
   m_Father: {fileID: 715083056}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7867211678455717435
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5723272846105234460}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.34, y: 0.22, z: 0.41534907}
-  m_Center: {x: 1.35, y: -0.45, z: 0.31088817}
 --- !u!33 &7871046676659459251
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4143,7 +4129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tag: square
   material: {fileID: 2100000, guid: cf8c18b00f86cb348a67ace1c24cb8e4, type: 2}
-  speed: 5
+  speed: 10
 --- !u!54 &9176626711794085677
 Rigidbody:
   m_ObjectHideFlags: 0
